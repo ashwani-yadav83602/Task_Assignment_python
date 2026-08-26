@@ -1,0 +1,55 @@
+import React from "react"
+import { Outlet, Link, useLocation } from "react-router-dom"
+import { LayoutDashboard, CheckSquare } from "lucide-react"
+import { cn } from "../../utils/cn"
+
+export const Layout = () => {
+  const location = useLocation()
+
+  const navItems = [
+    { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
+    { name: "Tasks", path: "/tasks", icon: CheckSquare },
+  ]
+
+  return (
+    <div className="flex h-screen bg-background">
+      {/* Sidebar */}
+      <aside className="w-64 border-r border-border bg-surface flex flex-col">
+        <div className="p-6 flex items-center space-x-3">
+          <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
+            <CheckSquare className="text-white h-5 w-5" />
+          </div>
+          <h1 className="text-xl font-bold text-textMain tracking-tight">TaskFlow</h1>
+        </div>
+        
+        <nav className="flex-1 px-4 space-y-2 mt-4">
+          {navItems.map((item) => {
+            const Icon = item.icon
+            const isActive = location.pathname.startsWith(item.path)
+            
+            return (
+              <Link
+                key={item.name}
+                to={item.path}
+                className={cn(
+                  "flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-all font-medium",
+                  isActive 
+                    ? "bg-primary/10 text-primary" 
+                    : "text-textMuted hover:bg-surfaceHover hover:text-textMain"
+                )}
+              >
+                <Icon className="h-5 w-5" />
+                <span>{item.name}</span>
+              </Link>
+            )
+          })}
+        </nav>
+      </aside>
+
+      {/* Main Content Area */}
+      <main className="flex-1 overflow-y-auto p-8">
+        <Outlet />
+      </main>
+    </div>
+  )
+}
