@@ -1,8 +1,8 @@
 import React from "react"
-import { Outlet, Link, useLocation } from "react-router-dom"
-import { LayoutDashboard, CheckSquare } from "lucide-react"
+import { LayoutDashboard, CheckSquare,LogOut } from "lucide-react"
 import { cn } from "../../utils/cn"
 import { useAuth } from "../../context/AuthContext"
+import { Outlet, Link, useLocation, useNavigate } from "react-router-dom"
 export const Layout = () => {
   const location = useLocation()
   const navigate = useNavigate()
