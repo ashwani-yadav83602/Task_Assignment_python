@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import dashboard, external, tasks, users
+from app.routes import dashboard, external, tasks, users
 from app.core.config import get_settings
 from app.core.exceptions import register_exception_handlers
 
