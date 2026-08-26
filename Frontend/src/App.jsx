@@ -1,8 +1,9 @@
 import React from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
 import { Layout } from "./components/layout/Layout"
+import { ProtectedRoute } from "./components/ProtectedRoute"
 
-// Lazy load pages later, for now we will create basic components
+import LoginPage from "./pages/LoginPage"
 import DashboardPage from "./pages/DashboardPage"
 import TasksPage from "./pages/TasksPage"
 import TaskDetailsPage from "./pages/TaskDetailsPage"
@@ -10,7 +11,8 @@ import TaskDetailsPage from "./pages/TaskDetailsPage"
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
         <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="tasks" element={<TasksPage />} />

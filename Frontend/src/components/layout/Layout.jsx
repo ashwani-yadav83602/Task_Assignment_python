@@ -2,10 +2,16 @@ import React from "react"
 import { Outlet, Link, useLocation } from "react-router-dom"
 import { LayoutDashboard, CheckSquare } from "lucide-react"
 import { cn } from "../../utils/cn"
-
+import { useAuth } from "../../context/AuthContext"
 export const Layout = () => {
   const location = useLocation()
+  const navigate = useNavigate()
+  const { user, logout } = useAuth()
 
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
+  }
   const navItems = [
     { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
     { name: "Tasks", path: "/tasks", icon: CheckSquare },
@@ -44,6 +50,21 @@ export const Layout = () => {
             )
           })}
         </nav>
+                <div className="p-4 border-t border-border">
+          <div className="flex items-center justify-between">
+            <div className="text-sm">
+              <p className="font-medium text-textMain">{user?.name}</p>
+              <p className="text-textMuted text-xs">{user?.role}</p>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="p-2 rounded-lg text-textMuted hover:bg-surfaceHover hover:text-textMain transition-all"
+              title="Logout"
+            >
+              <LogOut className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
       </aside>
 
       {/* Main Content Area */}

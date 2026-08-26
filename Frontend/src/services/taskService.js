@@ -37,5 +37,12 @@ export const taskService = {
     return fetchApi(`/tasks/${id}`, {
       method: 'DELETE',
     });
+  },
+  
+    addComment: async (taskId, comment) => {
+    return fetchApi(`/tasks/${taskId}/comments`, {
+      method: 'POST',
+      body: JSON.stringify({ comment }),
+    });
   }
 };
